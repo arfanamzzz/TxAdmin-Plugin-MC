@@ -1,0 +1,6 @@
+name: TxAdmin
+version: '${project.version}'
+main: dev.txadmin.TxAdmin
+bootstrapper: dev.txadmin.TxBootstrap
+api-version: '26.3'
+description: Menu admin ala txAdmin (FiveM) untuk Minecraft

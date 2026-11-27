@@ -1,0 +1,155 @@
+# ===== TxAdmin config =====
+# Daftar nama admin yang boleh memakai /tx (huruf besar/kecil tidak berpengaruh).
+admins:
+  - NamaKamu
+
+# ===== KEYBIND =====
+# Plugin server TIDAK bisa membaca sembarang tombol (F1-F12, huruf X/Z/V/G, dll).
+# Yang bisa dibaca: F, Q, angka 1-9, W A S D, Spasi, Shift, Ctrl, dan klik mouse.
+# Tiap aksi boleh diisi satu trigger ("F") atau beberapa (["F", "DOUBLE_SPACE"]).
+#
+# TRIGGER:
+#   F            tombol tukar item tangan        (alias: SWAP)
+#   SHIFT+F      Shift + F                       (alias: SHIFT_SWAP)
+#   Q            drop item (dibatalkan)          (alias: DROP)
+#   SHIFT+Q      Shift + Q                       (alias: SHIFT_DROP)
+#   1 .. 9       pindah slot hotbar (slot jadi tombol, tidak berpindah)
+#   SHIFT+1 .. SHIFT+9    Shift + angka
+#   DOUBLE_SHIFT tekan Shift 2x cepat            (alias: DOUBLE_SNEAK)
+#   DOUBLE_CTRL  tekan Ctrl/lari 2x cepat        (alias: DOUBLE_SPRINT)
+#   DOUBLE_W  DOUBLE_A  DOUBLE_S  DOUBLE_D  DOUBLE_SPACE    tekan 2x cepat
+#   SHIFT+SPACE  SHIFT+W  SHIFT+A  SHIFT+S  SHIFT+D        tahan Shift lalu tekan tombol
+#   CTRL+SPACE   CTRL+A   CTRL+S   CTRL+D                  tahan Ctrl lalu tekan tombol
+#   LEFT_CLICK  RIGHT_CLICK  SHIFT_LEFT_CLICK  SHIFT_RIGHT_CLICK   klik mouse
+#   NONE         nonaktif
+# Peringatan: klik mouse (terutama tanpa Shift) mudah terpicu tidak sengaja saat main biasa.
+# Saat noclip (mode spectator) server hanya membaca Shift/Ctrl/W/A/S/D/Spasi, bukan F, Q, angka, atau klik.
+# Jadi untuk exit-noclip pilih salah satu itu. /tx noclip selalu bisa dipakai.
+keybinds:
+  enabled: true          # default aktif untuk semua admin (tiap admin bisa matikan lewat /tx keys)
+  noclip: "F"
+  exit-noclip: "DOUBLE_SHIFT"   # dipakai hanya saat sedang noclip
+  menu: "SHIFT+F"
+  players: "NONE"        # buka daftar pemain
+  god: "NONE"
+  superjump: "NONE"
+  heal: "NONE"
+  back: "NONE"           # kembali ke posisi sebelum teleport
+  ids: "NONE"            # toggle Player IDs
+  names: "NONE"          # sembunyikan / tampilkan nametag asli pemain lain
+
+ids:
+  # Tulisan di atas kepala (hanya terlihat oleh admin yang menyalakan Player IDs).
+  # Placeholder: {id} dan {name}. Format MiniMessage. Contoh hasil: [1]ArfanAMZzz
+  format: "<yellow>[{id}]</yellow><white>{name}"
+  show-self: true        # admin juga melihat ID + nama dirinya sendiri
+  height-offset: 0.35    # naik/turunkan posisi tulisan di atas kepala
+
+ui:
+  type: dialog           # dialog = menu di tengah layar (Paper Dialog). inventory = menu inventory lama
+
+effects:
+  noclip-particles: true # partikel listrik saat noclip
+  noclip-lightning: false # petir visual saat noclip (default mati)
+
+warn:
+  dismiss-seconds: 10    # pemain harus menunggu sekian detik sebelum bisa menutup peringatan (Shift)
+
+banner-seconds: 10       # lama banner (bossbar) pengumuman / DM / restart tampil
+
+sounds:                  # kosongkan ("") untuk mematikan suara
+  announce: "minecraft:block.note_block.bell"
+  dm: "minecraft:block.note_block.chime"
+  warn: "minecraft:entity.elder_guardian.curse"
+  # Suara noclip. Suara custom (bukan suara Minecraft) butuh resource pack; sementara memakai suara listrik bawaan.
+  noclip-on: "minecraft:block.respawn_anchor.charge"
+  noclip-off: "minecraft:block.respawn_anchor.deplete"
+
+restart:
+  enabled: true
+  # Waktu restart sesuai zona waktu SERVER, format 24 jam HH:mm (contoh 04:00, bukan 4:00)
+  times: ["04:00", "12:00", "20:00"]
+  countdown-seconds: 600
+
+default-reasons:
+  warn: "Melanggar peraturan server"
+  kick: "Dikeluarkan oleh admin"
+  ban: "Melanggar peraturan server"
+
+# Pilihan durasi di menu Ban (maks 14). Format: 30m = menit, 2h = jam, 7d = hari, perm = permanen
+ban-durations: ["30m", "1h", "6h", "12h", "1d", "3d", "7d", "14d", "30d", "perm"]
+
+# Pilihan alasan siap pakai di menu Ban (maks 7). Alasan sendiri bisa diketik lewat tombol di menu.
+ban-reasons:
+  - "Cheat / hack"
+  - "Griefing"
+  - "Spam / iklan"
+  - "Toxic / melecehkan pemain"
+  - "Melanggar peraturan server"
+
+# Semua pesan memakai format MiniMessage (warna: <red>, <#ff8800>, <gradient:..>)
+messages:
+  prefix: "<gradient:#00c6ff:#0072ff><bold>TxAdmin</bold></gradient> <dark_gray>»</dark_gray> "
+  no-permission: "<red>Kamu bukan admin TxAdmin."
+  players-only: "<red>Perintah ini hanya untuk pemain."
+  player-not-found: "<red>Pemain <white>{player}</white> tidak ditemukan."
+  usage: "<yellow>Pemakaian: <white>{usage}"
+  invalid-duration: "<red>Durasi tidak valid. Contoh: <white>30m, 2h, 7d, perm"
+  god-on: "<green>Godmode <bold>ON</bold> untuk <white>{player}</white>."
+  god-off: "<red>Godmode <bold>OFF</bold> untuk <white>{player}</white>."
+  noclip-on: "<green>NoClip <bold>ON</bold> <gray>(keluar dengan /tx noclip atau keybind exit-noclip)"
+  noclip-off: "<red>NoClip <bold>OFF</bold>."
+  jump-on: "<green>Super Jump <bold>ON</bold> untuk <white>{player}</white>."
+  jump-off: "<red>Super Jump <bold>OFF</bold> untuk <white>{player}</white>."
+  healed: "<green><white>{player}</white> di-heal."
+  fed: "<green><white>{player}</white> dikenyangkan."
+  freeze-on: "<aqua><white>{player}</white> dibekukan."
+  freeze-off: "<green><white>{player}</white> dicairkan."
+  tp: "<green>Teleport ke <white>{player}</white>."
+  bring: "<green><white>{player}</white> ditarik ke posisimu."
+  back: "<green>Kembali ke posisi sebelumnya."
+  no-back: "<red>Tidak ada posisi sebelumnya."
+  spectate: "<green>Memantau <white>{player}</white>. <gray>Keluar dengan /tx noclip atau keybind exit-noclip."
+  warn-sent: "<yellow>Warn terkirim ke <white>{player}</white>: <gray>{reason}"
+  # Tampilan peringatan untuk pemain (mirip layar WARNING txAdmin)
+  warn-title: "<red><bold>⚠ PERINGATAN ⚠"
+  warn-subtitle: "<white>{reason}"
+  warn-chat: "<dark_red><bold>▌ PERINGATAN</bold><newline><red>Kamu telah diperingatkan oleh <white>{admin}</white>.<newline><red>Alasan: <white>{reason}<newline><gray>Patuhi peraturan server agar tidak di-kick atau di-ban."
+  warn-wait: "<red>Kamu tidak bisa bergerak selama <white>{seconds}</white> detik"
+  warn-dismiss: "<yellow>Tekan <bold>SPASI</bold> (lompat) untuk menutup peringatan"
+  kicked: "<yellow><white>{player}</white> di-kick: <gray>{reason}"
+  kick-screen: "<red><bold>Kamu telah di-kick dari server ini.</bold>\n\n<gray>Alasan: <white>{reason}\n<gray>Admin: <white>{by}"
+  banned: "<red><white>{player}</white> di-ban (<white>{id}</white>) sampai <white>{until}</white>: <gray>{reason}"
+  ban-screen: "<red><bold>Kamu telah di-ban dari server ini.</bold>\n\n<gray>Alasan: <white>{reason}\n<gray>Berakhir: <white>{until}\n<gray>Admin: <white>{by}\n<gray>ID Ban: <white>{id}"
+  unbanned: "<green><white>{player}</white> di-unban."
+  not-banned: "<red><white>{player}</white> tidak sedang di-ban."
+  # Pengumuman: pesan chat + banner di atas layar (bossbar)
+  announce-chat: "<gold><bold>⚠ Announcement by {admin}</bold><newline><white>{message}"
+  announce-banner: "<gold><bold>⚠ Announcement by {admin}:</bold> <white>{message}"
+  dm-sent: "<gray>Pesan ke <white>{player}</white>: <white>{message}"
+  dm-chat: "<yellow><bold>▌ PESAN DARI ADMIN</bold> <gray>({admin})<newline><white>{message}"
+  dm-banner: "<yellow><bold>Pesan dari {admin}:</bold> <white>{message}"
+  effect-given: "<green>Efek <white>{effect}</white> diberikan ke <white>{player}</white>."
+  effects-cleared: "<green>Semua efek <white>{player}</white> dihapus."
+  whitelist-on: "<green>Whitelist <bold>ON</bold>."
+  whitelist-off: "<red>Whitelist <bold>OFF</bold>."
+  whitelist-added: "<green><white>{player}</white> masuk whitelist."
+  whitelist-removed: "<red><white>{player}</white> keluar dari whitelist."
+  restart-warn: "<red><bold>▌ RESTART TERJADWAL</bold><newline><white>Server akan restart dalam <yellow>{time}</yellow>. Harap selesaikan aktivitasmu."
+  restart-banner: "<red><bold>Restart server dalam {time}"
+  restart-cancel: "<green>Restart server dibatalkan."
+  restart-started: "<yellow>Hitung mundur restart dimulai."
+  restart-kick: "<red><bold>Server sedang restart.</bold>\n\n<gray>Silakan masuk lagi sebentar lagi."
+  ids-on: "<green>ID pemain <bold>TAMPIL</bold> <gray>(hanya kamu yang melihat, termasuk milikmu sendiri; lihat dari F5). Sembunyikan nama asli dengan /tx names."
+  ids-off: "<red>ID pemain <bold>DISEMBUNYIKAN</bold>."
+  names-on: "<green>Nametag asli pemain lain <bold>DISEMBUNYIKAN</bold> <gray>(hanya untukmu). Scoreboard server tidak tampil selama ini aktif; ketik /tx names lagi untuk mengembalikan."
+  names-off: "<red>Nametag asli pemain lain <bold>DITAMPILKAN</bold> lagi."
+  keys-on: "<green>Keybind <bold>ON</bold>."
+  keys-off: "<red>Keybind <bold>OFF</bold>."
+  ban-type-reason: "<yellow>Ketik alasan ban di chat sekarang. <gray>(ketik <white>batal</white> untuk membatalkan)"
+  ban-pick-duration: "<red>Pilih durasi ban dulu."
+  console-only: "<red>This command works from the server console only. Use the txAdmin menu (/tx) in game."
+  vehicles-deleted: "<green>Deleted <white>{count}</white> vehicle(s)."
+  reloaded: "<green>Config dimuat ulang."
+  history-header: "<gold>Riwayat <white>{player}</white>:"
+  history-empty: "<gray>Tidak ada riwayat."
